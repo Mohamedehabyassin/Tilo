@@ -37,6 +37,8 @@ dependencies:
   flutter_icons: ^1.1.0
   community_material_icon: ^5.9.55
   carousel_slider: ^3.0.0
+  animations: ^2.0.0
+
 
 
 

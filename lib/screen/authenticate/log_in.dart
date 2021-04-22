@@ -4,6 +4,11 @@ import 'package:tilo/config/Palette.dart';
 import 'package:tilo/ui_builder/ui_builders.dart';
 
 class LoginScreen extends StatefulWidget {
+
+  final Function toggleView;
+
+  LoginScreen({this.toggleView});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }

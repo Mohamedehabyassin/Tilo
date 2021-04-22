@@ -5,6 +5,10 @@ import 'package:tilo/config/Palette.dart';
 import 'package:tilo/ui_builder/ui_builders.dart';
 
 class SignUpScreen extends StatefulWidget {
+  final Function toggleView;
+
+  SignUpScreen({this.toggleView});
+
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }

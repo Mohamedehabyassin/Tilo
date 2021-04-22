@@ -5,13 +5,30 @@ import 'package:tilo/request/request_data.dart';
 class DataProvider extends ChangeNotifier {
   var _dataRequest = APIService();
 
-  List<Result> data = [];
+  List<Result> menData = [];
+  List<Result> womenData = [];
+  List<Result> babyData = [];
 
-  DataProvider(int num,int page) {
-    getData(num,page);
+  DataProvider(int num, int page) {
+    getData(num, page);
   }
-  void getData(int num,int page) async {
-    data = await _dataRequest.get(num,page);
+
+  void getData(int num, int page) async {
+    if (num == 0) {
+      if (menData.isEmpty) {
+        menData = await _dataRequest.get(num, page);
+      }
+    }
+    if (num == 1) {
+      if (womenData.isEmpty) {
+        womenData = await _dataRequest.get(num, page);
+      }
+    }
+    if (num == 2) {
+      if (babyData.isEmpty) {
+        babyData = await _dataRequest.get(num, page);
+      }
+    }
     notifyListeners();
   }
 }

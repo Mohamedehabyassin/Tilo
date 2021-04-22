@@ -4,7 +4,7 @@ import 'package:tilo/model/data_model.dart';
 
 class APIService {
 
-  List<String> categories = ['men_all','ladies_divided','kids_all','kids_newbornbaby_viewall'];
+  List<String> categories = ['men_all','ladies','kids_all','kids_newbornbaby_viewall'];
   static const _api_key = "96d832efe3msh1eab4e43db45e79p1666a2jsn3df9f4cc679b";
 
   // Base API url

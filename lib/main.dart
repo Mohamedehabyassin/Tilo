@@ -5,6 +5,9 @@ import 'package:tilo/model/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tilo/screen/authenticate/log_in.dart';
 import 'package:tilo/screen/authenticate/sign_up.dart';
+import 'package:tilo/screen/categories/baby_screen.dart';
+import 'package:tilo/screen/categories/men_screen.dart';
+import 'package:tilo/screen/categories/women_screen.dart';
 import 'package:tilo/screen/home/home.dart';
 import 'package:tilo/screen/splash_screen.dart';
 
@@ -24,6 +27,9 @@ class MyApp extends StatelessWidget {
         routes: {'/SignUpScreen':((context)=>SignUpScreen()),
           '/LoginScreen':((context)=>LoginScreen()),
           '/HomeScreen':((context)=>HomeScreen()),
+          '/menScreen':((context)=>MenScreen()),
+          '/womenScreen':((context)=>WomenScreen()),
+          '/babyScreen':((context)=>BabyScreen()),
         },
         home: SplashScreen(),
       ),

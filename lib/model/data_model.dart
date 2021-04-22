@@ -178,7 +178,7 @@ class Result {
   String name;
   Stock stock;
   Price price;
-  List<Image> images;
+  List<Imagee> images;
   List<dynamic> categories;
   String pk;
   Price whitePrice;
@@ -214,7 +214,7 @@ class Result {
     name: json["name"],
     stock: Stock.fromJson(json["stock"]),
     price: Price.fromJson(json["price"]),
-    images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+    images: List<Imagee>.from(json["images"].map((x) => Imagee.fromJson(x))),
     categories: List<dynamic>.from(json["categories"].map((x) => x)),
     pk: json["pk"],
     whitePrice: Price.fromJson(json["whitePrice"]),
@@ -312,11 +312,11 @@ class Article {
 
   String code;
   String name;
-  List<Image> images;
+  List<Imagee> images;
   String pk;
   Price whitePrice;
-  List<Image> logoPicture;
-  List<Image> normalPicture;
+  List<Imagee> logoPicture;
+  List<Imagee> normalPicture;
   List<Marker> markers;
   bool visible;
   int numbersOfPieces;
@@ -330,17 +330,17 @@ class Article {
   List<SellingAttribute> sellingAttributes;
   List<Environment> environmentalMarkers;
   CampaignMedia campaignMedia;
-  Image picture;
+  Imagee picture;
   List<String> swatches;
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
     code: json["code"],
     name: json["name"],
-    images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+    images: List<Imagee>.from(json["images"].map((x) => Imagee.fromJson(x))),
     pk: json["pk"],
     whitePrice: Price.fromJson(json["whitePrice"]),
-    logoPicture: List<Image>.from(json["logoPicture"].map((x) => Image.fromJson(x))),
-    normalPicture: List<Image>.from(json["normalPicture"].map((x) => Image.fromJson(x))),
+    logoPicture: List<Imagee>.from(json["logoPicture"].map((x) => Imagee.fromJson(x))),
+    normalPicture: List<Imagee>.from(json["normalPicture"].map((x) => Imagee.fromJson(x))),
     markers: json["markers"] == null ? null : List<Marker>.from(json["markers"].map((x) => Marker.fromJson(x))),
     visible: json["visible"],
     numbersOfPieces: json["numbersOfPieces"],
@@ -354,7 +354,7 @@ class Article {
     sellingAttributes: json["sellingAttributes"] == null ? null : List<SellingAttribute>.from(json["sellingAttributes"].map((x) => sellingAttributeValues.map[x])),
     environmentalMarkers: json["environmentalMarkers"] == null ? null : List<Environment>.from(json["environmentalMarkers"].map((x) => environmentValues.map[x])),
     campaignMedia: json["campaignMedia"] == null ? null : CampaignMedia.fromJson(json["campaignMedia"]),
-    picture: json["picture"] == null ? null : Image.fromJson(json["picture"]),
+    picture: json["picture"] == null ? null : Imagee.fromJson(json["picture"]),
     swatches: json["swatches"] == null ? null : List<String>.from(json["swatches"].map((x) => x)),
   );
 
@@ -448,14 +448,14 @@ final environmentValues = EnumValues({
   "Simone Rocha x H&M": Environment.SIMONE_ROCHA_X_H_M
 });
 
-class Image {
-  Image({
+class Imagee {
+  Imagee({
     this.url,
   });
 
   String url;
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory Imagee.fromJson(Map<String, dynamic> json) => Imagee(
     url: json["url"],
   );
 
