@@ -33,11 +33,17 @@ dependencies:
   provider:
   cloud_firestore:
   http:
+  animations: ^2.0.0
   email_validator: '^1.0.6'
   flutter_icons: ^1.1.0
   community_material_icon: ^5.9.55
   carousel_slider: ^3.0.0
-  animations: ^2.0.0
+  selectable_circle: ^0.1.6+4
+  like_button: ^2.0.2
+  eva_icons_flutter: ^3.0.0
+  circular_profile_avatar: ^2.0.0
+  image_picker: ^0.7.4
+
 
 
 
@@ -63,6 +69,9 @@ flutter:
     - assets/splash.jpg
     - assets/login.jpg
     - assets/shopping.jpg
+    - assets/
+    - assets/Gift/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -76,6 +85,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: KiwiMaru
+      fonts:
+        - asset: fonts/KiwiMaru-Regular.ttf
+          # - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
+    - family: Nunito
+      fonts:
+        - asset: fonts/Nunito-Regular.ttf
+
   # fonts:
   #   - family: Schyler
   #     fonts:
