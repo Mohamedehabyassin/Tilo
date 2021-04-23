@@ -16,7 +16,7 @@ class UserProfileScreen extends StatelessWidget {
         create: (_) => DatabaseService(),
         child: Consumer<DatabaseService>(
           builder: (ctx, user, _) {
-            return (user.userData != null && _user != null)
+            return (_user!=null)
                 ? Column(
                     children: [
                       SingleChildScrollView(
