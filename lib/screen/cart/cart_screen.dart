@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tilo/provider/cart_provider.dart';
 import 'package:tilo/screen/cart/widgets/body.dart';
 
 class CartScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    final itemProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       appBar: buildAppBar(context),
       body: Body(),
@@ -39,7 +44,7 @@ class CartScreen extends StatelessWidget {
                           color: Colors.grey[600], fontWeight: FontWeight.bold),
                       children: [
                         TextSpan(
-                          text: '\$1500.00',
+                          text: '\$ ${itemProvider.totalAmount}',
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.black,
@@ -84,6 +89,8 @@ class CartScreen extends StatelessWidget {
 }
 
 AppBar buildAppBar(BuildContext context) {
+  final itemProvider = Provider.of<CartProvider>(context);
+
   return AppBar(
     backgroundColor: Colors.white,
     title: Center(
@@ -94,7 +101,7 @@ AppBar buildAppBar(BuildContext context) {
             style: TextStyle(color: Colors.grey[600], fontFamily: "Nunito"),
           ),
           Text(
-            '4 items',
+            '${itemProvider.items.length} items',
             style: TextStyle(
               color: Colors.purple,
               fontWeight: FontWeight.bold,

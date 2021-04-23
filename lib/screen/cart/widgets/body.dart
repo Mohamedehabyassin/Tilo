@@ -1,37 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tilo/provider/cart_provider.dart';
 
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: ListView.builder(
-        itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Dismissible(
-            key: Key('id'),
-            direction: DismissDirection.endToStart,
-            background: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              decoration: BoxDecoration(
-                color: Colors.red[200],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  Spacer(),
-                  Icon(
-                    Icons.delete,
-                    color: Colors.grey[700],
+    final itemProvider = Provider.of<CartProvider>(context);
+
+    return (itemProvider.items.length != 0)
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ListView.builder(
+              itemCount: itemProvider.items.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Dismissible(
+                  key: Key('${itemProvider.items[index].code}'),
+                  direction: DismissDirection.endToStart,
+                  // onDismissed: (direction) => {
+                  //   itemProvider.removeItem(itemProvider.items[index])
+                  // },
+                  background: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    decoration: BoxDecoration(
+                      color: Colors.red[200],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      children: [
+                        Spacer(),
+                        Icon(
+                          Icons.delete,
+                          color: Colors.grey[700],
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                  child: CartItemCard(),
+                ),
               ),
             ),
-            child: CartItemCard(),
-          ),
-        ),
-      ),
-    );
+          )
+        : Center(
+            child: Text("No Items Added"),
+          );
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tilo/provider/data_provider.dart';
+import 'package:tilo/screen/details_screen.dart';
 
 class BabyScreen extends StatelessWidget {
   @override
@@ -23,7 +24,10 @@ class BabyScreen extends StatelessWidget {
                       itemBuilder: (ctx, index) {
                         return GestureDetector(
                           onTap: (){
-
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => DetailsScreen(item: _data.babyData[index],)),
+                            );
                           },
                           child: Container(
                               padding: EdgeInsets.all(12),
