@@ -2,18 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:provider/provider.dart';
+import 'package:tilo/model/user_model.dart';
 import 'package:tilo/service/database_service.dart';
 
 class UserProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _user = Provider.of<UserModel>(context);
+
     return Scaffold(
       body: ChangeNotifierProvider<DatabaseService>(
         create: (_) => DatabaseService(),
         child: Consumer<DatabaseService>(
           builder: (ctx, user, _) {
-            return (user.userData != null)
+            return (user.userData != null && _user != null)
                 ? Column(
                     children: [
                       SingleChildScrollView(
