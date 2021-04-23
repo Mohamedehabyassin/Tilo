@@ -4,6 +4,7 @@ import 'package:tilo/auth/authService.dart';
 import 'package:tilo/model/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tilo/provider/cart_provider.dart';
+import 'package:tilo/provider/wishlist_provider.dart';
 import 'package:tilo/screen/authenticate/log_in.dart';
 import 'package:tilo/screen/authenticate/sign_up.dart';
 import 'package:tilo/screen/cart/cart_screen.dart';
@@ -23,6 +24,9 @@ void main() async {
     ChangeNotifierProvider.value(
       value: CartProvider(),
     ),
+    ChangeNotifierProvider.value(
+      value: WishlistProvider(),
+    )
   ], child: MyApp()));
 }
 
@@ -33,17 +37,6 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        /*
-        * routes: {
-          '/SignUpScreen':((context)=>SignUpScreen()),
-          '/LoginScreen':((context)=>LoginScreen()),
-          '/HomeScreen':((context)=>HomeScreen()),
-          '/CartScreen':((context)=>CartScreen()),
-          '/GiftScreen':((context)=>GiftScreen()),
-          '/CompleteScreen':((context)=>CompleteScreen()),
-          '/EditProfileScreen':((context)=>EditProfileScreen()),
-
-        },*/
         routes: {
           '/SignUpScreen': ((context) => SignUpScreen()),
           '/LoginScreen': ((context) => LoginScreen()),
@@ -51,11 +44,10 @@ class MyApp extends StatelessWidget {
           '/menScreen': ((context) => MenScreen()),
           '/womenScreen': ((context) => WomenScreen()),
           '/babyScreen': ((context) => BabyScreen()),
-          '/CartScreen':((context)=>CartScreen()),
-          '/GiftScreen':((context)=>GiftScreen()),
-          '/CompleteScreen':((context)=>CompleteScreen()),
-          '/EditProfileScreen':((context)=>EditProfileScreen()),
-
+          '/CartScreen': ((context) => CartScreen()),
+          '/GiftScreen': ((context) => GiftScreen()),
+          '/CompleteScreen': ((context) => CompleteScreen()),
+          '/EditProfileScreen': ((context) => EditProfileScreen()),
         },
         home: SplashScreen(),
       ),

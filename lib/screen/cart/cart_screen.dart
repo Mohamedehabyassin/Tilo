@@ -10,10 +10,9 @@ class CartScreen extends StatelessWidget {
     final itemProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
-      appBar: buildAppBar(context),
       body: Body(),
       bottomNavigationBar: Container(
-        //height: 120,
+        height: 120,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -80,41 +79,23 @@ class CartScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 10,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 38,),
+                  Text('${itemProvider.items.length} items',style: TextStyle(
+                    color: Colors.purple,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    fontFamily: 'Nunito',
+                  ),),
+                ],
+              )
             ],
           ),
         ),
       ),
     );
   }
-}
-
-AppBar buildAppBar(BuildContext context) {
-  final itemProvider = Provider.of<CartProvider>(context);
-
-  return AppBar(
-    backgroundColor: Colors.white,
-    title: Center(
-      child: Column(
-        children: [
-          Text(
-            'YOUR CART',
-            style: TextStyle(color: Colors.grey[600], fontFamily: "Nunito"),
-          ),
-          Text(
-            '${itemProvider.items.length} items',
-            style: TextStyle(
-              color: Colors.purple,
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-              fontFamily: 'Nunito',
-            ),
-          ),
-        ],
-      ),
-    ),
-    leading: IconButton(
-      icon: Icon(Icons.arrow_back, color: Colors.purple),
-      onPressed: () => Navigator.of(context).pop(),
-    ),
-  );
 }

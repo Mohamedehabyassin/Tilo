@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:tilo/auth/authService.dart';
 import 'package:tilo/config/Palette.dart';
 import 'package:tilo/ui_builder/ui_builders.dart';
 
 class LoginScreen extends StatefulWidget {
-
   final Function toggleView;
 
   LoginScreen({this.toggleView});
@@ -14,9 +14,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email = '';
+  String password = '';
+  final AuthService _auth = AuthService();
 
-  String email= '';
-  String password= '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,8 +111,66 @@ class _LoginScreenState extends State<LoginScreen> {
                     margin: EdgeInsets.only(top: 20),
                     child: Column(
                       children: [
-                        buildTextField(Icons.mail, 'Email', false, true),
-                        buildTextField(Icons.lock, 'Password', true, false),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 9.0),
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                email = value;
+                              });
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.email,
+                                  color: Colors.purple,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.purple),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.purple),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40)),
+                                ),
+                                contentPadding: EdgeInsets.all(10),
+                                hintText: "E-mail",
+                                hintStyle: TextStyle(
+                                    fontFamily: 'Nunito', fontSize: 20)),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 9.0),
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                password = value;
+                              });
+                            },
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  color: Colors.purple,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.purple),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.purple),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40)),
+                                ),
+                                contentPadding: EdgeInsets.all(10),
+                                hintText: "Password",
+                                hintStyle: TextStyle(
+                                    fontFamily: 'Nunito', fontSize: 20)),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -133,8 +192,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).pushNamed('/HomeScreen');
+                  onTap: () async {
+                    dynamic result =
+                        _auth.signInWithEmailAndPassword(email, password);
+                    if (result != null) {
+                      Navigator.of(context).pushNamed('/HomeScreen');
+                    }
                   },
                   child: Container(
                     height: 90,
@@ -180,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.grey[600]),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.of(context).pushNamed('/SignUpScreen');
                       },
                       child: Text(

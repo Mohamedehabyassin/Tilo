@@ -8,11 +8,16 @@ class DatabaseService extends ChangeNotifier {
   final CollectionReference userCollection =
   FirebaseFirestore.instance.collection("User");
 
-  DatabaseService() {
-    getBabiesList();
+  var userData ;
+
+  DatabaseService()  {
+    getUserData().then((value) {
+      userData = value;
+      notifyListeners();
+    });
+
   }
 
-  List babies = [];
 
   Future<void> addUser(String name) async {
     final User user = auth.currentUser;
@@ -22,53 +27,21 @@ class DatabaseService extends ChangeNotifier {
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
   }
-
-  Future<void> addBaby(String babyName, String babyGender,
-      String babyBirthday) async {
-    final User user = auth.currentUser;
-    Map<String, dynamic> regionData = new Map<String, dynamic>();
-    regionData["babyName"] = babyName;
-    regionData["babyGender"] = babyGender;
-    regionData["babyBirthday"] = babyBirthday;
-
-    DocumentReference currentRegion = FirebaseFirestore.instance
-        .collection("User")
-        .doc(user.uid)
-        .collection('Babies')
-        .doc(babyName);
-
-    FirebaseFirestore.instance.runTransaction((transaction) async {
-       transaction.set(currentRegion, regionData);
-      print("instance created");
-    });
-    notifyListeners();
-  }
-
   Future getUserData() async {
     final User user = auth.currentUser;
     return userCollection.doc(user.uid).get();
   }
 
-  Future updateUserData(String userName, String gender) async {
+  Future updateUserData(String userName, String fullName,String eMail, String phone, String address) async {
     final User user = auth.currentUser;
     final userId = user.uid;
     return await userCollection.doc(userId).update({
       'userName': userName,
-      'gender': gender,
+      'fullName': fullName,
+      'eMail' : eMail,
+      'phone' : phone,
+      'address':address
     });
-  }
-
-  Future getBabiesList() async {
-    final User user = auth.currentUser;
-    final CollectionReference collectionReference = FirebaseFirestore.instance
-        .collection("User")
-        .doc(user.uid)
-        .collection("Babies");
-    QuerySnapshot data = await collectionReference.get();
-    babies = data.docs.map((QueryDocumentSnapshot e) {
-      return e.data();
-    }).toList();
-    notifyListeners();
 
   }
 }

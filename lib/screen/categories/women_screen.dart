@@ -1,17 +1,33 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tilo/provider/data_provider.dart';
 import 'package:tilo/screen/details_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class WomenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Colors.indigo,
-        title: Center(child: Text("Women Section")),
+        backgroundColor: Colors.white,
+        title: Center(
+          child: Column(
+            children: [
+              Text(
+                'Women Section',
+                style: TextStyle(
+                    color: Colors.grey[600],
+                    fontFamily: "Nunito",
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.purple),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: ChangeNotifierProvider<DataProvider>(
           create: (context) => DataProvider(1, 0),
@@ -21,68 +37,108 @@ class WomenScreen extends StatelessWidget {
                   ? ListView.builder(
                   itemCount: _data.womenData.length,
                   itemBuilder: (ctx, index) {
-                    return GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DetailsScreen(item: _data.womenData[index],)),
-                        );
-
-                      },
-                      child: Container(
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.grey[200],
-                          ),
-                          margin: EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  flex: 2,
+                    return Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.grey[100],
+                        ),
+                        margin: EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                flex: 2,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(30.0),
                                   child: Image.network(
-                                      "${_data.womenData[index].images[0].url}")),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                  flex: 3,
-                                  child: Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${_data.womenData[index].name}",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
+                                      "${_data.womenData[index].images[0].url}"),
+                                )),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                                flex: 3,
+                                child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${_data.womenData[index].name}",
+                                      style: TextStyle(
+                                        color: Colors.purple,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        fontFamily: 'Nunito',
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 40,
+                                    ),
+                                    Text(
+                                      "${_data.womenData[index].whitePrice.value} EGP",
+                                      style: TextStyle(
+                                          color: Colors.grey[600],
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 40,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        ElevatedButton.icon(
+                                          //child
+                                          style: ButtonStyle(
+                                            foregroundColor:
+                                            MaterialStateProperty.all<
+                                                Color>(Colors.white),
+                                            backgroundColor:
+                                            MaterialStateProperty.all<
+                                                Color>(Colors.purple),
+                                            shape:
+                                            MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    40.0),
+                                                side: BorderSide(
+                                                    color: Colors.purple),
+                                              ),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailsScreen(
+                                                      item: _data
+                                                          .womenData[index],
+                                                    ),
+                                              ),
+                                            );
+                                          },
+                                          icon: Icon(EvaIcons.list),
+                                          label: Text("More Details",
+                                              style:
+                                              TextStyle(fontSize: 16)),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                      ),
-                                      Text(
-                                        "${_data.womenData[index].whitePrice.value} EGP",
-                                        style: TextStyle(
-                                            color: Colors.red, fontSize: 17),
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.end,
-                                        children: [
-                                          Icon(Icons.favorite_border)
-                                        ],
-                                      )
-                                    ],
-                                  ))
-                            ],
-                          )),
-                    );
+                                      ],
+                                    ),
+                                  ],
+                                ))
+                          ],
+                        ));
                   })
-                  : Center(child: CircularProgressIndicator());
+                  : Center(
+                child: SpinKitCubeGrid(
+                  color: Colors.purple,
+                  size: 50.0,
+                ),
+              );
             },
           )),
     );

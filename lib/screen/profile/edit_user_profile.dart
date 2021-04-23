@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tilo/service/database_service.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -11,6 +12,13 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   bool showPassword = false;
   File _image;
+  String fullName;
+  String userName;
+  String phone;
+  String address;
+  String email;
+  DatabaseService _service = DatabaseService();
+
   //final picker = ImagePicker();
 
   Future getImage(ImageSource src) async {
@@ -106,14 +114,139 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", "Jason Statham", false),
-              buildTextField("Username", "jason785", false),
-              buildTextField("E-mail", "jason@gmail.com", false),
-              buildTextField("Password", "********", true),
-              buildTextField("Address", "Alexandria,Egypt", false),
-              SizedBox(
-                height: 35,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: TextField(
+                  onChanged: (value){
+                    setState(() {
+                      fullName=value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(bottom: 5),
+                    labelText: 'Full Name',
+                    labelStyle: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 20,
+                        color: Colors.purple
+                    ),
+                    //floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: TextField(
+                  onChanged: (value){
+                    setState(() {
+                      userName = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(bottom: 5),
+                    labelText: 'User Name',
+                    labelStyle: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 20,
+                        color: Colors.purple
+                    ),
+                    //floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: TextField(
+                  onChanged: (value){
+                    email = value;
+                  },
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    suffixIcon: true
+                        ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          showPassword =!showPassword;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.remove_red_eye,
+                        color: Colors.grey,
+                      ),
+                    )
+                        : null,
+                    contentPadding: EdgeInsets.only(bottom: 5),
+                    labelText: 'E-Mail',
+                    labelStyle: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 20,
+                        color: Colors.purple
+                    ),
+                    //floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: TextField(
+                  onChanged: (value){
+                    phone=value;
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(bottom: 5),
+                    labelText: 'Phone',
+                    labelStyle: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 20,
+                        color: Colors.purple
+                    ),
+                    //floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: TextField(
+                  onChanged: (value){
+                    setState(() {
+                      address = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(bottom: 5),
+                    labelText: 'Address',
+                    labelStyle: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 20,
+                        color: Colors.purple
+                    ),
+                    //floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+              ),
+
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -131,7 +264,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      await _service.updateUserData(userName, fullName, email, phone, address);
                       Navigator.of(context).pop();
                     },
                   ),
