@@ -46,37 +46,38 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
+        automaticallyImplyLeading: false,
         title: Text("Home Page"),
         elevation: 0,
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: CircleAvatar(
-                backgroundColor: Colors.indigo[100],
-                child: Text('Hello'),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.indigo,
-              ),
-            ),
-            ListTile(
-              title: Text('Cart'),
-              leading: Icon(Icons.card_travel_rounded),
-            ),
-            ListTile(
-              title: Text('Favorite'),
-              leading: Icon(Icons.favorite),
-            ),
-            ListTile(
-                title: Text('Sign out'),
-                leading: Icon(Icons.exit_to_app_outlined),
-                onTap: () {})
-          ],
-        ),
-      ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     padding: EdgeInsets.zero,
+      //     children: <Widget>[
+      //       DrawerHeader(
+      //         child: CircleAvatar(
+      //           backgroundColor: Colors.indigo[100],
+      //           child: Text('Hello'),
+      //         ),
+      //         decoration: BoxDecoration(
+      //           color: Colors.indigo,
+      //         ),
+      //       ),
+      //       ListTile(
+      //         title: Text('Cart'),
+      //         leading: Icon(Icons.card_travel_rounded),
+      //       ),
+      //       ListTile(
+      //         title: Text('Favorite'),
+      //         leading: Icon(Icons.favorite),
+      //       ),
+      //       ListTile(
+      //           title: Text('Sign out'),
+      //           leading: Icon(Icons.exit_to_app_outlined),
+      //           onTap: () {})
+      //     ],
+      //   ),
+      // ),
       // body:         child: _widgetOptions.elementAt(_selectedIndex),
 
       body: ListView(
