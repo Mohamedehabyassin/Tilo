@@ -6,22 +6,21 @@ import 'package:tilo/model/user_model.dart';
 import 'package:tilo/service/database_service.dart';
 
 class UserProfileScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final _user = Provider.of<UserModel>(context);
-
     return Scaffold(
       body: ChangeNotifierProvider<DatabaseService>(
-        create: (_) => DatabaseService(),
+        create: (context) => DatabaseService(),
         child: Consumer<DatabaseService>(
           builder: (ctx, user, _) {
-            return (_user!=null)
+            print(user.userData);
+            return (_user != null && user.userData != null)
                 ? Column(
                     children: [
                       SingleChildScrollView(
                         child: Container(
-                          height: 280,
+                          height: 300,
                           child: Stack(
                             children: [
                               ClipPath(
@@ -50,7 +49,7 @@ class UserProfileScreen extends StatelessWidget {
                                       radius: 70.0,
                                     ),
                                     SizedBox(
-                                      height: 10,
+                                      height: 20,
                                     ),
                                     Text(
                                       '${user.userData['fullName']}',

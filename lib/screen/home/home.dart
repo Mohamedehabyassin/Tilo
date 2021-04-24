@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+import 'package:tilo/auth/authService.dart';
 import 'package:tilo/screen/cart/cart_screen.dart';
 import 'package:tilo/screen/home/entrance_screen.dart';
 import 'package:tilo/screen/profile/user_profile.dart';
@@ -22,12 +23,22 @@ class _HomeScreenState extends State<HomeScreen> {
     CartScreen(),
     UserProfileScreen()
   ];
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.add),
+          color: Colors.indigo,
+          onPressed: (){
+            Navigator.of(context)
+                .pushNamed('/LoginScreen');
+          },
+        ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Image.asset(
@@ -35,6 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 40,
           width: 80,
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app,color: Colors.indigo,size: 30,),
+            onPressed: () async{
+              await _auth.signOut();
+
+            },
+          )
+        ],
       ),
       body: _widgetOptions.elementAt(selectedIndex),
       bottomNavigationBar: FancyBottomNavigation(

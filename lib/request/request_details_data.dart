@@ -1,15 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:tilo/model/data_model.dart';
 import 'package:tilo/model/details_data_model.dart';
 
 class DetailsAPIService {
-  // DetailsAPIService({this.productCode});
-  //
-  // final int productCode;
   static const _api_key = "96d832efe3msh1eab4e43db45e79p1666a2jsn3df9f4cc679b";
-
-  // Base API url
 
   Future<Product> get(String productCode) async {
     String _baseUrl =

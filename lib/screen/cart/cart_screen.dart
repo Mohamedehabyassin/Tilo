@@ -12,7 +12,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       body: Body(),
       bottomNavigationBar: Container(
-        height: 120,
+        height: 140,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(

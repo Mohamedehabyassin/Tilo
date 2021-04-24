@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:like_button/like_button.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tilo/screen/profile/user_profile.dart';
 import 'package:tilo/service/database_service.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -117,9 +117,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 35.0),
                 child: TextField(
-                  onChanged: (value){
+                  onChanged: (value) {
                     setState(() {
-                      fullName=value;
+                      fullName = value;
                     });
                   },
                   decoration: InputDecoration(
@@ -128,8 +128,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     labelStyle: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 20,
-                        color: Colors.purple
-                    ),
+                        color: Colors.purple),
                     //floatingLabelBehavior: FloatingLabelBehavior.always,
                     hintStyle: TextStyle(
                       fontSize: 16,
@@ -141,7 +140,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 35.0),
                 child: TextField(
-                  onChanged: (value){
+                  onChanged: (value) {
                     setState(() {
                       userName = value;
                     });
@@ -152,8 +151,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     labelStyle: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 20,
-                        color: Colors.purple
-                    ),
+                        color: Colors.purple),
                     //floatingLabelBehavior: FloatingLabelBehavior.always,
                     hintStyle: TextStyle(
                       fontSize: 16,
@@ -162,35 +160,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(bottom: 35.0),
                 child: TextField(
-                  onChanged: (value){
+                  onChanged: (value) {
                     email = value;
                   },
-                  obscureText: true,
                   decoration: InputDecoration(
-                    suffixIcon: true
-                        ? IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showPassword =!showPassword;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.grey,
-                      ),
-                    )
-                        : null,
                     contentPadding: EdgeInsets.only(bottom: 5),
                     labelText: 'E-Mail',
                     labelStyle: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 20,
-                        color: Colors.purple
-                    ),
+                        color: Colors.purple),
                     //floatingLabelBehavior: FloatingLabelBehavior.always,
                     hintStyle: TextStyle(
                       fontSize: 16,
@@ -202,8 +184,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 35.0),
                 child: TextField(
-                  onChanged: (value){
-                    phone=value;
+                  onChanged: (value) {
+                    phone = value;
                   },
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(bottom: 5),
@@ -211,8 +193,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     labelStyle: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 20,
-                        color: Colors.purple
-                    ),
+                        color: Colors.purple),
                     //floatingLabelBehavior: FloatingLabelBehavior.always,
                     hintStyle: TextStyle(
                       fontSize: 16,
@@ -224,7 +205,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 35.0),
                 child: TextField(
-                  onChanged: (value){
+                  onChanged: (value) {
                     setState(() {
                       address = value;
                     });
@@ -235,8 +216,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     labelStyle: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 20,
-                        color: Colors.purple
-                    ),
+                        color: Colors.purple),
                     //floatingLabelBehavior: FloatingLabelBehavior.always,
                     hintStyle: TextStyle(
                       fontSize: 16,
@@ -245,8 +225,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
               ),
-
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -265,8 +243,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     onPressed: () async {
-                      await _service.updateUserData(userName, fullName, email, phone, address);
-                      Navigator.of(context).pop();
+                      await _service.updateUserData(
+                          userName, fullName, email, phone, address);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UserProfileScreen()),
+                      );
                     },
                   ),
                 ],
@@ -289,7 +271,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ? IconButton(
                   onPressed: () {
                     setState(() {
-                      showPassword =!showPassword;
+                      showPassword = !showPassword;
                     });
                   },
                   icon: Icon(
@@ -301,10 +283,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           contentPadding: EdgeInsets.only(bottom: 5),
           labelText: labelText,
           labelStyle: TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 20,
-            color: Colors.purple
-          ),
+              fontFamily: 'Nunito', fontSize: 20, color: Colors.purple),
           //floatingLabelBehavior: FloatingLabelBehavior.always,
           hintText: placeholder,
           hintStyle: TextStyle(
